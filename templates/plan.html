@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %} plan {% endblock %}
+{% block content %}	
+	<div id = "title">
+	<h1>Workout Helper</h1>
+	<hr>
+	</div>
+	<h3>Intensity Calculator</h3>	
+	<form action = "#" method = "POST">
+		<table>
+			<tr>
+				<th>reps<br> <i>(<15)</i></th>
+				<td><input type="number" name="reps" size = "9"> 
+				</td>
+			</tr>
+			<tr>
+				<th>weight</th>
+				<td><input type="number" name="weight" size = "9"></td>
+			</tr>
+			<tr>
+				<th>1RM</th>
+				<td><input type="number" name="1RM" size = "9"></td>
+			</tr>
+			<tr>
+				<th rowspan = '2'>
+					<input type="submit" value="Intensities">
+				</th>
+				<td id = "result">
+					rel -> {{ri}}
+				</td>
+			</tr>
+			<tr id = "result">
+				<td>
+					abs -> {{ai}}
+				</td>
+			</tr>
+		</table>
+	</form>
+	<br>
+	<br>
+	<h3>New Absolute Intensity</h3>
+	<form action = "#" method = "POST">
+			<table>
+				<tr>
+					<th>reps</th>
+					<td><input type="number" name="repsI" size = "3"> 
+					</td>
+				</tr>
+				<tr>
+					<th>desired relative <br> intensity</th>
+					<td><input type="number" name="relI" size = "3"></td>
+				</tr>
+				<tr>
+					<th><input type="submit" value="absolute intensity"></th>
+					<td id = "result">{{new_ai}}</td>
+				</tr>
+			</table>
+	</form>
+	<br>
+	<br>
+	<h3><a href="/">One Rep Max Calculator</a></h3>
+{% endblock %}

@@ -1,0 +1,33 @@
+body {
+	font-family: Courier New, monospace;
+	margin-top: 60px;
+	background-color: #F5F5F5;
+}
+#title {
+	margin-bottom: 60px;
+}
+hr {
+	margin: auto;
+}
+h1,h3 {
+	text-align: center;	
+}
+#add {
+	text-align: center;
+}
+#result,#add {
+	text-align: center;
+	background-color: #cccccc; 
+}
+table {
+	border-collapse: collapse;
+	border: 2px solid black;
+	text-align: left;
+	background-color: #F0F0F0;
+	margin-left: auto;
+	margin-right: auto;
+}
+th,td {
+	padding: 10px;
+	border: 1px solid black;
+}
