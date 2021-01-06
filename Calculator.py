@@ -1,4 +1,4 @@
-import math, csv
+import math, csv, json
 from flask import Flask, redirect, url_for, render_template,request
 
 '''
@@ -29,6 +29,16 @@ def increased_ai(reps, desired_ri):
 	mi =  (1.0278 - 0.0278 * reps)
 	new_ai = math.floor(mi * (desired_ri))/100
 	return new_ai
+
+def addMax(exercise, weight, file):
+    with open(file, "r") as read_file:
+        saved = json.load(read_file)
+        
+    new = {exercise : weight}
+    saved.update(new)
+    
+    with open(file, "w") as write_file:
+        json.dump(saved, write_file, indent = 4, sort_keys = True, separators = (",",":"))
 
 '''
 getting the web page up and running. Allows for a one_rep max to be determined, relative intensity, and what
@@ -78,36 +88,55 @@ def plan():
 		new_ai = ""
 	return render_template("plan.html", ri = ri, ai = ai, new_ai = new_ai)
 
-def add_user(csv_file,name,pswrd):
-	accounts = open(csv_file,'a', newline='\n')
-	obj = csv.writer(accounts)
-	obj.writerow([name,pswrd])
-	accounts.close()
-
-def exists(csv_file,name):
-	with open(csv_file,'rt') as f:
-		users = csv.reader(f)
-		for user in users:
-			if user[0] == name:
-				return user
-		return False
 
 
-def verify(csv_file, name, pswrd):
-	profile = users.exists(csv_file,name)
-	if len(profile) > 0:
-		if profile[1] == pswrd:
-			return True
-	return False
+@app.route('/tracker/', methods = ["POST","GET"])
+def tracker():
+	if request.method == "POST":
+		try:
+			weight = int (request.form['weight'])
+			exercise = request.form['exercise']
+			addMax(exercise,weight, "tracker.json")
+		except:
+			print ("error")
+	else:
+		rm = ""
 
-@app.route('/login/', methods=['POST','Get'])
-def login():
-	if request.method=="POST":
-		name = request.form['new_name']
-		pswrd = request.form['new_pswrd']
-		if exists('csv_tests/users.csv',name) == False:
-			add_user('csv_tests/users.csv',name,pswrd)
-	return render_template("login.html")
+	with open("tracker.json", "r") as read_file:
+		workouts = json.load(read_file)
+	return render_template("tracker.html", workouts = workouts)
+
+
+# def add_user(csv_file,name,pswrd):
+# 	accounts = open(csv_file,'a', newline='\n')
+# 	obj = csv.writer(accounts)
+# 	obj.writerow([name,pswrd])
+# 	accounts.close()
+
+# def exists(csv_file,name):
+# 	with open(csv_file,'rt') as f:
+# 		users = csv.reader(f)
+# 		for user in users:
+# 			if user[0] == name:
+# 				return user
+# 		return False
+
+
+# def verify(csv_file, name, pswrd):
+# 	profile = users.exists(csv_file,name)
+# 	if len(profile) > 0:
+# 		if profile[1] == pswrd:
+# 			return True
+# 	return False
+
+# @app.route('/login/', methods=['POST','Get'])
+# def login():
+# 	if request.method=="POST":
+# 		name = request.form['new_name']
+# 		pswrd = request.form['new_pswrd']
+# 		if exists('csv_tests/users.csv',name) == False:
+# 			add_user('csv_tests/users.csv',name,pswrd)
+# 	return render_template("login.html")
 
 if __name__ == "__main__":
 	app.run(debug = True)

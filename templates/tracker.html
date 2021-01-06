@@ -5,25 +5,34 @@
 <h3>tracker</h3>	
 <table>
 	<tr>
-		<th>exercise</th><th>history</th>
+		<th>exercise</th><th>one rep max</th>
 	</tr>
+	{% for key in workouts %}
 	<tr>
-		<td>deadlifts</td>
-		<td><a href="./history">workouts</a></td>
+		<td>{{ key }}</td>
+		<td>{{ workouts[key] }}</td>
 	</tr>
+	{% endfor %}
+	<form action="#" method="POST">
 	<tr>
-		<td colspan=2 id = "add"> 
-			<form action="/" method="ADD">
-				<input name = "exercise" type = "text">
-				<input value = "add" type = "submit">
-			</form>
+		<td> 
+			<input type = "text" name = "exercise">
+		</td>
+		<td>
+			<input type = "number" name = "weight">
 		</td>
 	</tr>
+	<tr>
+		<td colspan="2">
+			<input value="add" type = "submit">
+		</td>
+	</tr>
+	</form>
 </table>
 <br>
 <br>
-<h3><a href="./max.html">One Rep Max Calculator</a></h3>
+<h3><a href="/">One Rep Max Calculator</a></h3>
 <br>
-<h3><a href="./plan.html">Relative Intensity Calculator</a></h3>
+<h3><a href="/plan/">Relative Intensity Calculator</a></h3>
 {% endblock %}
 
