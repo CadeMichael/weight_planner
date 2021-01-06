@@ -107,6 +107,7 @@ def tracker():
 	return render_template("tracker.html", workouts = workouts)
 
 
+
 # def add_user(csv_file,name,pswrd):
 # 	accounts = open(csv_file,'a', newline='\n')
 # 	obj = csv.writer(accounts)
