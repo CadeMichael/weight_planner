@@ -99,11 +99,10 @@ def tracker():
 			addMax(exercise,weight, "tracker.json")
 		except:
 			print ("error")
-	else:
-		rm = ""
 
 	with open("tracker.json", "r") as read_file:
 		workouts = json.load(read_file)
+		
 	return render_template("tracker.html", workouts = workouts)
 
 
